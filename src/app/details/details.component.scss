@@ -23,6 +23,10 @@ mat-list-item {
     padding: 25px;
 }
 
+mat-spinner {
+  margin: 70px auto 50px;
+}
+
 @media screen and (max-width: 800px) {
     #details-list {
         width: 100%;

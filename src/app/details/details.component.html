@@ -1,50 +1,60 @@
 <div id="details-list">
-
-    @if(countryDetails.name){
-    <h2>{{countryDetails.name}}</h2>
-    <mat-list role="list">
-        @if(countryDetails.capital){
-        <mat-list-item role="list-item">
+  @if (loadingData) {
+    <mat-spinner diameter="50"></mat-spinner>
+  } @else {
+    @if (countryDetails.name) {
+      <h2>{{ countryDetails.name }}</h2>
+      <mat-list role="list">
+        @if (countryDetails.capital) {
+          <mat-list-item role="listitem">
             <span class="list-title">
                 Capital
             </span>
-            {{countryDetails.capital}}
-        </mat-list-item>}
-        @if(countryDetails.language){
-        <mat-list-item role="list-item">
+            {{ countryDetails.capital }}
+          </mat-list-item>
+        }
+        @if (countryDetails.language) {
+          <mat-list-item role="listitem">
             <span class="list-title">
                 Language
             </span>
-            {{countryDetails.language}}
-        </mat-list-item>}
-        @if(countryDetails.region){
-        <mat-list-item role="list-item">
+            {{ countryDetails.language }}
+          </mat-list-item>
+        }
+        @if (countryDetails.region) {
+          <mat-list-item role="listitem">
             <span class="list-title">
                 Region
             </span>
-            {{countryDetails.region}}
-        </mat-list-item>}
-        @if(countryDetails.population){
-        <mat-list-item role="list-item">
+            {{ countryDetails.region }}
+          </mat-list-item>
+        }
+        @if (countryDetails.population) {
+          <mat-list-item role="listitem">
             <span class="list-title">
                 Population
             </span>
-            {{countryDetails.population}}
-        </mat-list-item>}
-        @if(countryDetails.currency){
-        <mat-list-item role="list-item">
+            {{ countryDetails.population }}
+          </mat-list-item>
+        }
+        @if (countryDetails.currency) {
+          <mat-list-item role="listitem">
             <span class="list-title">
                 Currency
             </span>
-            {{countryDetails.currency}}
-        </mat-list-item>}
-        @if(countryDetails.incomeLevel){
-        <mat-list-item role="list-item">
+            {{ countryDetails.currency }}
+          </mat-list-item>
+        }
+        @if (countryDetails.incomeLevel) {
+          <mat-list-item role="listitem">
             <span class="list-title">
                 Income Level
             </span>
-            {{countryDetails.incomeLevel}}
-        </mat-list-item>}
-    </mat-list>
+            {{ countryDetails.incomeLevel }}
+          </mat-list-item>
+        }
+      </mat-list>
     }
+  }
+
 </div>

@@ -299,27 +299,19 @@ export class CountryAPIService {
     population: ''
   })
 
+  public fetchingData = new BehaviorSubject(false);
+
 
   constructor(cds:CountryDataAPIService) {
     this.countryDataService = cds;
   }
 
-  // static getCountries(){
-  //   return CountryAPIService.countries;
-  // }
-
-  // getCountryDetails():CountryDetails {
-  //   return this.countryDetails();
-  // }
-  //
-  // getSelectedCountry():CountryInfo {
-  //   return this.selectedCountry();
-  // }
-
   setSelectedCountry(name:string, code:string){
     //fetch api data
+    this.fetchingData.next(true);
     this.selectedCountry.next({name,code})
     this.countryDataService.getCountryAPIData(code).subscribe(data => {
+      this.fetchingData.next(false);
       this.countryDetails.next({
           name: data?.countryName,
             language:this.languageNames.of(data.languages?.split(',')[0])!,
