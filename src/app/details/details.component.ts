@@ -1,4 +1,4 @@
-import {Component, effect} from '@angular/core';
+import {Component} from '@angular/core';
 import {CountryAPIService} from '../services/countryapi.service';
 import {CountryDetails} from '../services/countryapi.service';
 import {MatListModule} from '@angular/material/list';

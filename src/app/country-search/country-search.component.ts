@@ -12,10 +12,10 @@ import { map, startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 
-//Class to define and detect custom form errors. 
+//Class to define and detect custom form errors.
 class CustomErrorStateMatcher implements ErrorStateMatcher {
   customComponentValidation;
-  
+
   constructor(cv:any){
     this.customComponentValidation = cv;
   }
@@ -40,11 +40,16 @@ class CustomErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class CountrySearchComponent implements OnInit{
-  CountryService;
-  countries = CountryAPIService.getCountries();
+  countryApiService;
+  countries;
   inputFormControl = new FormControl('');
   filteredCountries:Observable<string[]> | null = null;
-  
+
+  constructor(countryAPIService:CountryAPIService){
+    this.countryApiService = countryAPIService;
+    this.countries = countryAPIService.countries;
+  }
+
   //filter autocomplete options when typing
   ngOnInit():void {
     this.filteredCountries = this.inputFormControl.valueChanges.pipe(startWith(''),map(inputValue => {
@@ -52,22 +57,19 @@ export class CountrySearchComponent implements OnInit{
       return this.countries.filter(country => country.toLowerCase().includes(value?.toLowerCase()!));
     }),);
   }
-  
-  constructor(sc:CountryAPIService){
-    this.CountryService = sc;
-  }
-  
+
+
   validCountry = (country:string):boolean => {
     return this.countries?.includes(country.toLowerCase());
   }
-  
+
   setCountry = () => {
     const userCountry = document.querySelector(`[title='${this.inputFormControl.value?.toLowerCase()}']`) as HTMLElement | '';
     if(userCountry) {
-      this.CountryService.setSelectedCountry(userCountry.getAttribute('title')!,userCountry.getAttribute('id')!)
+      this.countryApiService.setSelectedCountry(userCountry.getAttribute('title')!,userCountry.getAttribute('id')!)
       }
    }
-  
+
   matcher = new CustomErrorStateMatcher(this.validCountry);
 
 }

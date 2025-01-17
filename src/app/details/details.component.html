@@ -1,49 +1,49 @@
 <div id="details-list">
 
-    @if(selectedCountry.name){
-    <h2>{{selectedCountry.name}}</h2>
+    @if(countryDetails.name){
+    <h2>{{countryDetails.name}}</h2>
     <mat-list role="list">
-        @if(selectedCountry.capital){
+        @if(countryDetails.capital){
         <mat-list-item role="list-item">
             <span class="list-title">
                 Capital
             </span>
-            {{selectedCountry.capital}}
+            {{countryDetails.capital}}
         </mat-list-item>}
-        @if(selectedCountry.language){
+        @if(countryDetails.language){
         <mat-list-item role="list-item">
             <span class="list-title">
                 Language
             </span>
-            {{selectedCountry.language}}
+            {{countryDetails.language}}
         </mat-list-item>}
-        @if(selectedCountry.region){
+        @if(countryDetails.region){
         <mat-list-item role="list-item">
             <span class="list-title">
                 Region
             </span>
-            {{selectedCountry.region}}
+            {{countryDetails.region}}
         </mat-list-item>}
-        @if(selectedCountry.population){
+        @if(countryDetails.population){
         <mat-list-item role="list-item">
             <span class="list-title">
                 Population
             </span>
-            {{selectedCountry.population}}
+            {{countryDetails.population}}
         </mat-list-item>}
-        @if(selectedCountry.currency){
+        @if(countryDetails.currency){
         <mat-list-item role="list-item">
             <span class="list-title">
                 Currency
             </span>
-            {{selectedCountry.currency}}
+            {{countryDetails.currency}}
         </mat-list-item>}
-        @if(selectedCountry.incomeLevel){
+        @if(countryDetails.incomeLevel){
         <mat-list-item role="list-item">
             <span class="list-title">
                 Income Level
             </span>
-            {{selectedCountry.incomeLevel}}
+            {{countryDetails.incomeLevel}}
         </mat-list-item>}
     </mat-list>
     }

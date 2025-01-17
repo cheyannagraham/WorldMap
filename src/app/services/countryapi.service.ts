@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { CountryDataAPIService } from './country-data-api.service';
 import {BehaviorSubject} from "rxjs";
 
