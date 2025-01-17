@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { CountryDataAPIService } from './country-data-api.service';
+import {BehaviorSubject} from "rxjs";
 
 export type CountryInfo = {
   name:string,
@@ -22,7 +23,7 @@ export type CountryDetails = {
 
 export class CountryAPIService {
 
-  private static countries:string[] = [
+  countries:string[] = [
     "afghanistan",
     "aland islands",
     "albania",
@@ -282,13 +283,13 @@ export class CountryAPIService {
   countryDataService;
   currencyNames = new Intl.DisplayNames(['en'],{type: 'currency'});
   languageNames = new Intl.DisplayNames(['en'],{type: 'language'});
-  
-  private selectedCountry = signal<CountryInfo>({
+
+  public selectedCountry = new BehaviorSubject<CountryInfo>({
     name:'',
     code:''
   });
 
-  private countryDetails = signal<CountryDetails>({
+  public countryDetails = new BehaviorSubject<CountryDetails>({
     name:'',
     language:'',
     currency:'',
@@ -296,30 +297,30 @@ export class CountryAPIService {
     capital:'',
     region: '',
     population: ''
-  })  
+  })
 
-    
+
   constructor(cds:CountryDataAPIService) {
     this.countryDataService = cds;
   }
 
-  static getCountries(){
-    return CountryAPIService.countries;
-  }
+  // static getCountries(){
+  //   return CountryAPIService.countries;
+  // }
 
-  getCountryDetails():CountryDetails {
-    return this.countryDetails();
-  } 
-
-  getSelectedCountry():CountryInfo {
-    return this.selectedCountry();
-  }
+  // getCountryDetails():CountryDetails {
+  //   return this.countryDetails();
+  // }
+  //
+  // getSelectedCountry():CountryInfo {
+  //   return this.selectedCountry();
+  // }
 
   setSelectedCountry(name:string, code:string){
     //fetch api data
-    this.selectedCountry.set({name,code})
+    this.selectedCountry.next({name,code})
     this.countryDataService.getCountryAPIData(code).subscribe(data => {
-      this.countryDetails.set({
+      this.countryDetails.next({
           name: data?.countryName,
             language:this.languageNames.of(data.languages?.split(',')[0])!,
             currency:(this.currencyNames.of(data?.currencyCode) as string),
@@ -331,5 +332,5 @@ export class CountryAPIService {
     });
 
   }
-  
+
 }
